@@ -6,11 +6,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Jangan Lupa Masukin API kalian masing masing di dalam .env di dalamnya berisi </br>
 
-### `REACT_APP_TMDB_KEY="API Key Kalian Masing Masing"`</br>
+`REACT_APP_TMDB_KEY="API Key Kalian Masing Masing"`</br>
 
-### `REACT_APP_BASE_URL=https://api.themoviedb.org/3`</br>
+`REACT_APP_BASE_URL=https://api.themoviedb.org/3`</br>
 
-### `REACT_APP_IMG_URL=https://image.tmdb.org/t/p/w500`
+`REACT_APP_IMG_URL=https://image.tmdb.org/t/p/w500`
 
 Kalian Bisa API Bikin di [sini](https://developers.themoviedb.org/3/getting-started/introduction)
 
