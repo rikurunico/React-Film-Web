@@ -12,7 +12,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### `REACT_APP_IMG_URL=https://image.tmdb.org/t/p/w500`
 
-Kalian Bisa Bikin di [sini](https://developers.themoviedb.org/3/getting-started/introduction)
+Kalian Bisa API Bikin di [sini](https://developers.themoviedb.org/3/getting-started/introduction)
 
 In the project directory, you can run:
 
