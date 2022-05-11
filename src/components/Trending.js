@@ -1,12 +1,21 @@
+import { useEffect, useState } from "react";
 import { Row, Card, Col, Container, Image } from "react-bootstrap";
-import duneImage from "../assets/images/trending/dune.jpg";
-import everythingImage from "../assets/images/trending/everything.jpg";
-import infiniteImage from "../assets/images/trending/infinite.jpg";
-import jokerImage from "../assets/images/trending/joker.jpg";
-import lightyearImage from "../assets/images/trending/lightyear.jpg";
-import morbiusImage from "../assets/images/trending/morbius.jpg";
+import axios from "axios";
 
 const Trending = () => {
+  const [movies, setMovies] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/discover/movie`, {
+        params: {
+          api_key: process.env.REACT_APP_TMDB_KEY,
+        },
+      })
+      .then((response) => {
+        setMovies(response.data.results);
+      });
+  }, []);
+
   return (
     <div>
       <Container>
@@ -14,96 +23,31 @@ const Trending = () => {
         <br />
         <h1 className="text-white">Film Trending</h1>
         <Row>
-          <Col md={4} className="movieWrapper" id="trending">
-            <Card className=" movieImage">
-              <Image src={duneImage} className="images" />
-              <div className="bg-dark ">
-                <div className="p-2 m-1 text-white">
-                  <Card.Title className="text-center">DUNE</Card.Title>
-                  <Card.Text className="text-left">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content.
-                  </Card.Text>
-                  <Card.Text>Last updated 3 mins ago</Card.Text>
-                </div>
-              </div>
-            </Card>
-          </Col>
-          <Col md={4} className="movieWrapper">
-            <Card className=" movieImage">
-              <Image src={everythingImage} className="images" />
-              <div className="bg-dark ">
-                <div className="p-2 m-1 text-white">
-                  <Card.Title className="text-center">EVERYTHING</Card.Title>
-                  <Card.Text className="text-left">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content.
-                  </Card.Text>
-                  <Card.Text>Last updated 3 mins ago</Card.Text>
-                </div>
-              </div>
-            </Card>
-          </Col>
-          <Col md={4} className="movieWrapper">
-            <Card className=" movieImage">
-              <Image src={infiniteImage} className="images" />
-              <div className="bg-dark ">
-                <div className="p-2 m-1 text-white">
-                  <Card.Title className="text-center">INFINITE</Card.Title>
-                  <Card.Text className="text-left">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content.
-                  </Card.Text>
-                  <Card.Text>Last updated 3 mins ago</Card.Text>
-                </div>
-              </div>
-            </Card>
-          </Col>
-          <Col md={4} className="movieWrapper">
-            <Card className=" movieImage">
-              <Image src={jokerImage} className="images" />
-              <div className="bg-dark ">
-                <div className="p-2 m-1 text-white">
-                  <Card.Title className="text-center">JOKER</Card.Title>
-                  <Card.Text className="text-left">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content.
-                  </Card.Text>
-                  <Card.Text>Last updated 3 mins ago</Card.Text>
-                </div>
-              </div>
-            </Card>
-          </Col>
-          <Col md={4} className="movieWrapper">
-            <Card className=" movieImage">
-              <Image src={morbiusImage} className="images" />
-              <div className="bg-dark ">
-                <div className="p-2 m-1 text-white">
-                  <Card.Title className="text-center">MORBIUS</Card.Title>
-                  <Card.Text className="text-left">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content.
-                  </Card.Text>
-                  <Card.Text>Last updated 3 mins ago</Card.Text>
-                </div>
-              </div>
-            </Card>
-          </Col>
-          <Col md={4} className="movieWrapper">
-            <Card className=" movieImage">
-              <Image src={lightyearImage} className="images" />
-              <div className="bg-dark ">
-                <div className="p-2 m-1 text-white">
-                  <Card.Title className="text-center">LIGHT YEAR</Card.Title>
-                  <Card.Text className="text-left">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content.
-                  </Card.Text>
-                  <Card.Text>Last updated 3 mins ago</Card.Text>
-                </div>
-              </div>
-            </Card>
-          </Col>
+          {movies.map((result, index) => {
+            return (
+              <Col md={4} className="movieWrapper" id="trending" key={index}>
+                <Card className=" movieImage">
+                  <Image
+                    src={`${process.env.REACT_APP_IMG_URL}/${result.poster_path}`}
+                    className="images"
+                    alt="testing"
+                    quality="high"
+                  />
+                  <div className="bg-dark ">
+                    <div className="p-2 m-1 text-white">
+                      <Card.Title className="text-center">
+                        {result.title}
+                      </Card.Title>
+                      <Card.Text className="text-left">
+                        {result.overview}
+                      </Card.Text>
+                      <Card.Text>{result.release_date}</Card.Text>
+                    </div>
+                  </div>
+                </Card>
+              </Col>
+            );
+          })}
         </Row>
       </Container>
     </div>
